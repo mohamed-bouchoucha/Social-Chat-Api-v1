@@ -42,7 +42,7 @@ dependencies:
   
   # WebSocket (STOMP protocol for Spring backend)
   web_socket_channel: ^2.4.0
-  stomp_dart_client: ^1.0.1
+  stomp_dart_client: ^0.4.4
   
   # Local Storage
   shared_preferences: ^2.0.0

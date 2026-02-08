@@ -124,7 +124,8 @@ A modern, production-ready social chat application built with Flutter.
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/social-chat-app.git
+git clone https://github.com/mohamed-bouchoucha/Social-Chat-Api
+.git
 
 # Navigate to project
 cd social-chat-app

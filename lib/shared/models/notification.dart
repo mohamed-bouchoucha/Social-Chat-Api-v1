@@ -1,131 +1,136 @@
 import 'package:social_chat_app/shared/models/user.dart';
 
+/// Notification type enum
 enum NotificationType {
+  friendRequest,
+  friendAccepted,
   like,
   comment,
-  friendRequest,
   message,
-  postMention,
-  commentMention,
+  mention,
+  system,
 }
 
+/// Notification model matching backend NotificationResponse DTO
 class AppNotification {
-  final String id;
-  final User sender;
-  final String? receiverId;
+  final int id;
   final NotificationType type;
-  final String content;
-  final String? relatedPostId;
-  final String? relatedCommentId;
-  final String? relatedChatId;
+  final String title;
+  final String message;
+  final UserSummary? actor;
+  final int? referenceId;
+  final String? referenceType;
   final bool isRead;
   final DateTime createdAt;
-  
+
   AppNotification({
     required this.id,
-    required this.sender,
-    this.receiverId,
     required this.type,
-    required this.content,
-    this.relatedPostId,
-    this.relatedCommentId,
-    this.relatedChatId,
-    required this.isRead,
+    required this.title,
+    required this.message,
+    this.actor,
+    this.referenceId,
+    this.referenceType,
+    this.isRead = false,
     required this.createdAt,
   });
-  
+
   factory AppNotification.fromJson(Map<String, dynamic> json) {
     return AppNotification(
-      id: json['id'] ?? '',
-      sender: User.fromJson(json['sender'] ?? {}),
-      receiverId: json['receiverId'],
-      type: _parseNotificationType(json['type']),
-      content: json['content'] ?? '',
-      relatedPostId: json['relatedPostId'],
-      relatedCommentId: json['relatedCommentId'],
-      relatedChatId: json['relatedChatId'],
-      isRead: json['isRead'] ?? false,
+      id: json['id'] ?? 0,
+      type: _parseType(json['type']),
+      title: json['title'] ?? '',
+      message: json['message'] ?? '',
+      actor: json['actor'] != null 
+          ? UserSummary.fromJson(json['actor']) 
+          : null,
+      referenceId: json['referenceId'],
+      referenceType: json['referenceType'],
+      isRead: json['read'] ?? json['isRead'] ?? false,
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime.now(),
     );
   }
-  
-  static NotificationType _parseNotificationType(String? type) {
-    switch (type?.toLowerCase()) {
+
+  static NotificationType _parseType(String? type) {
+    if (type == null) return NotificationType.system;
+    switch (type.toLowerCase()) {
+      case 'friend_request':
+        return NotificationType.friendRequest;
+      case 'friend_accepted':
+        return NotificationType.friendAccepted;
       case 'like':
         return NotificationType.like;
       case 'comment':
         return NotificationType.comment;
-      case 'friendrequest':
-        return NotificationType.friendRequest;
       case 'message':
         return NotificationType.message;
-      case 'postmention':
-        return NotificationType.postMention;
-      case 'commentmention':
-        return NotificationType.commentMention;
+      case 'mention':
+        return NotificationType.mention;
       default:
-        return NotificationType.like;
+        return NotificationType.system;
     }
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'sender': sender.toJson(),
-      'receiverId': receiverId,
-      'type': type.name,
-      'content': content,
-      'relatedPostId': relatedPostId,
-      'relatedCommentId': relatedCommentId,
-      'relatedChatId': relatedChatId,
-      'isRead': isRead,
+      'type': type.name.toUpperCase(),
+      'title': title,
+      'message': message,
+      'actor': actor?.toJson(),
+      'referenceId': referenceId,
+      'referenceType': referenceType,
+      'read': isRead,
       'createdAt': createdAt.toIso8601String(),
     };
   }
-  
+
   AppNotification copyWith({
-    String? id,
-    User? sender,
-    String? receiverId,
+    int? id,
     NotificationType? type,
-    String? content,
-    String? relatedPostId,
-    String? relatedCommentId,
-    String? relatedChatId,
+    String? title,
+    String? message,
+    UserSummary? actor,
+    int? referenceId,
+    String? referenceType,
     bool? isRead,
     DateTime? createdAt,
   }) {
     return AppNotification(
       id: id ?? this.id,
-      sender: sender ?? this.sender,
-      receiverId: receiverId ?? this.receiverId,
       type: type ?? this.type,
-      content: content ?? this.content,
-      relatedPostId: relatedPostId ?? this.relatedPostId,
-      relatedCommentId: relatedCommentId ?? this.relatedCommentId,
-      relatedChatId: relatedChatId ?? this.relatedChatId,
+      title: title ?? this.title,
+      message: message ?? this.message,
+      actor: actor ?? this.actor,
+      referenceId: referenceId ?? this.referenceId,
+      referenceType: referenceType ?? this.referenceType,
       isRead: isRead ?? this.isRead,
       createdAt: createdAt ?? this.createdAt,
     );
   }
-  
-  String get notificationTitle {
-    switch (type) {
-      case NotificationType.like:
-        return '${sender.username} liked your post';
-      case NotificationType.comment:
-        return '${sender.username} commented on your post';
-      case NotificationType.friendRequest:
-        return '${sender.username} sent you a friend request';
-      case NotificationType.message:
-        return 'New message from ${sender.username}';
-      case NotificationType.postMention:
-        return '${sender.username} mentioned you in a post';
-      case NotificationType.commentMention:
-        return '${sender.username} mentioned you in a comment';
+
+  String get timeAgo {
+    final now = DateTime.now();
+    final difference = now.difference(createdAt);
+
+    if (difference.inDays > 0) {
+      return '${difference.inDays}d ago';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}h ago';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}m ago';
     }
+    return 'Just now';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is AppNotification && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
-  

@@ -1,40 +1,40 @@
 import 'package:social_chat_app/shared/models/user.dart';
 
+/// Post model matching backend PostResponse DTO
 class Post {
-  final String id;
-  final User author;
+  final int id;
+  final UserSummary author;
   final String content;
-  final List<String>? imageUrls;
+  final List<String> imageUrls;
   final int likesCount;
   final int commentsCount;
   final bool isLiked;
   final DateTime createdAt;
   final DateTime? updatedAt;
-  
+
   Post({
     required this.id,
     required this.author,
     required this.content,
-    this.imageUrls,
+    this.imageUrls = const [],
     required this.likesCount,
     required this.commentsCount,
     required this.isLiked,
     required this.createdAt,
     this.updatedAt,
   });
-  
-  // Factory constructor for JSON
+
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      id: json['id'] ?? '',
-      author: User.fromJson(json['author'] ?? {}),
+      id: json['id'] ?? 0,
+      author: UserSummary.fromJson(json['author'] ?? {}),
       content: json['content'] ?? '',
       imageUrls: json['imageUrls'] != null 
           ? List<String>.from(json['imageUrls'])
-          : null,
+          : [],
       likesCount: json['likesCount'] ?? 0,
       commentsCount: json['commentsCount'] ?? 0,
-      isLiked: json['isLiked'] ?? false,
+      isLiked: json['liked'] ?? json['isLiked'] ?? false,
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime.now(),
@@ -43,8 +43,7 @@ class Post {
           : null,
     );
   }
-  
-  // Convert to JSON
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -53,16 +52,15 @@ class Post {
       'imageUrls': imageUrls,
       'likesCount': likesCount,
       'commentsCount': commentsCount,
-      'isLiked': isLiked,
+      'liked': isLiked,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
     };
   }
-  
-  // Copy with method for immutability
+
   Post copyWith({
-    String? id,
-    User? author,
+    int? id,
+    UserSummary? author,
     String? content,
     List<String>? imageUrls,
     int? likesCount,
@@ -83,16 +81,15 @@ class Post {
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
-  
-  // Helper methods
-  bool hasImages() => imageUrls != null && imageUrls!.isNotEmpty;
-  
-  bool isEdited() => updatedAt != null;
-  
+
+  bool get hasImages => imageUrls.isNotEmpty;
+  bool get isEdited => updatedAt != null;
+
+  /// Get relative time string
   String get timeAgo {
     final now = DateTime.now();
     final difference = now.difference(createdAt);
-    
+
     if (difference.inSeconds < 60) {
       return 'Just now';
     } else if (difference.inMinutes < 60) {
@@ -112,4 +109,13 @@ class Post {
       return '${years}y ago';
     }
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Post && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
