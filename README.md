@@ -1,137 +1,73 @@
-# social_chat_app
+# SocialChat Flutter App
 
-A new Flutter project.
+A production-ready Flutter frontend for a real-time social networking and messaging platform powered by a Spring Boot backend.
 
-## Getting Started
+This project implements a modern social chat application with JWT-based authentication, real-time messaging using WebSockets (STOMP with SockJS), live notifications, presence tracking, and a full social system including posts, likes, comments, and friends.
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+### Authentication & Users
+- JWT-based login and registration
+- Secure token storage
+- Profile management (avatar, bio, display name)
+- Logout and session handling
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Social Networking
+- Create and view posts
+- Like and comment on posts
+- User discovery and search
+- Friend requests and friend list management
+- Block / unblock users
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-## Project Structure
-lib/
-├── main.dart                      # App entry point
-├── core/                          # Core app functionality
-│   ├── constants/                 # App constants, routes, themes
-│   ├── utils/                     # Helper functions, validators
-│   ├── network/                   # API clients, interceptors
-│   ├── storage/                   # Local storage (SharedPreferences)
-│   └── widgets/                   # Reusable widgets
-├── features/                      # Feature-based modules
-│   ├── auth/                      # Authentication
-│   │   ├── data/                  # Auth data layer
-│   │   ├── domain/                # Auth business logic
-│   │   └── presentation/          # Auth UI
-│   ├── chat/                      # Real-time chat
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   ├── posts/                     # Social posts
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   ├── friends/                   # Friends management
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   ├── profile/                   # User profile
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   └── notifications/             # Notifications
-│       ├── data/
-│       ├── domain/
-│       └── presentation/
-├── shared/                        # Shared components
-│   ├── models/                    # Data models
-│   ├── repositories/              # Base repositories
-│   └── services/                  # Shared services
-└── app/                          # App-wide components
-    ├── router/                    # Navigation/router
-    ├── theme/                     # App theme
-    └── state/                     # Global state management
+### Real-Time Communication
+- One-to-one and group chat
+- Message persistence
+- Typing indicators
+- Read receipts
+- Delivery confirmation
+- Online / offline presence tracking
+- Friends-only visibility
 
-# Social Chat App - Flutter
-
-A modern, production-ready social chat application built with Flutter.
-
-## Features
-
-### ✅ Authentication
-- Email/Password login & registration
-- Social login (Google, Facebook)
-- JWT token-based authentication
-- Auto token refresh
-- Remember me functionality
-
-### ✅ Real-time Chat
-- One-on-one messaging
-- Group chats
-- Read receipts & typing indicators
-- Online status
-- Message reactions
-- File sharing (images, videos, documents)
-- Voice messages
-- Location sharing
-
-### ✅ User Management
-- User profiles with avatars
-- Contact list
+### Real-Time Notifications
+- New messages
 - Friend requests
-- Block users
-- Privacy settings
+- Likes and comments
+- Instant delivery via WebSocket
 
-### ✅ Advanced Features
-- Push notifications
-- Dark/light theme
-- Message search
-- Chat backup
-- End-to-end encryption (optional)
-- Voice/video calls (WebRTC ready)
+## 🧱 Tech Stack
 
-### ✅ Media Support
-- Image/video viewer
-- Document preview
-- Audio player
-- Gallery integration
+**Frontend**
+- Flutter 3.x
+- Dart
+- Riverpod (state management)
+- Dio (REST API client)
+- STOMP over WebSocket (SockJS compatible)
+- GoRouter
+- Material 3
 
-## Tech Stack
+**Backend (separate repository)**
+- Java Spring Boot
+- MySQL
+- JWT Authentication
+- WebSocket (STOMP)
 
-- **Flutter 3.x** - Cross-platform framework
-- **Riverpod** - State management
-- **Dio** - HTTP client
-- **WebSocket** - Real-time communication
-- **Freezed** - Data classes
-- **Shared Preferences** - Local storage
-- **SQLite** - Local database (optional)
-- **Firebase** - Push notifications (optional)
+## 🔌 Backend Integration
 
-## Getting Started
+The app connects to a Spring Boot backend using:
+- REST APIs for authentication and social features
+- WebSocket (STOMP) for chat, presence, and notifications
 
-### 1. Prerequisites
-- Flutter SDK 3.0+
-- Dart 3.0+
-- Android Studio / VS Code
-- Java JDK 11+
-- Node.js (for some packages)
+All backend URLs are configurable and can be adjusted to match your environment.
 
-### 2. Installation
-```bash
-# Clone the repository
-git clone https://github.com/mohamed-bouchoucha/Social-Chat-Api
-.git
+## 📦 Project Status
 
-# Navigate to project
-cd social-chat-app
+This repository provides a scalable, clean-architecture Flutter starter that is ready for:
+- Android
+- iOS
+- Web
 
-# Install dependencies
-flutter pub get
+It is designed to be extended with additional features such as push notifications, media uploads, and advanced moderation tools.
 
-# Generate code (freezed, etc.)
-flutter packages pub run build_runner build --delete-conflicting-outputs
+## 📄 License
+
+MIT License
