@@ -1,73 +1,73 @@
-# SocialChat Flutter App
+# Hi there, I'm Mohamed Bouchoucha 👋
 
-A production-ready Flutter frontend for a real-time social networking and messaging platform powered by a Spring Boot backend.
+Welcome to my GitHub profile! I'm a passionate developer focused on building scalable applications and creative solutions.
 
-This project implements a modern social chat application with JWT-based authentication, real-time messaging using WebSockets (STOMP with SockJS), live notifications, presence tracking, and a full social system including posts, likes, comments, and friends.
+## 🚀 About Me
 
-## 🚀 Features
+I'm a full-stack developer with expertise in modern technologies and a keen interest in software architecture. I love collaborating with teams, contributing to open-source projects, and continuously learning new technologies.
 
-### Authentication & Users
-- JWT-based login and registration
-- Secure token storage
-- Profile management (avatar, bio, display name)
-- Logout and session handling
+- 💻 Building innovative applications
+- 🎯 Focused on clean code and best practices
+- 🌱 Always learning and exploring new technologies
+- 💬 Ask me about development, architecture, or problem-solving
 
-### Social Networking
-- Create and view posts
-- Like and comment on posts
-- User discovery and search
-- Friend requests and friend list management
-- Block / unblock users
+## 🛠️ Tech Stack 
 
-### Real-Time Communication
-- One-to-one and group chat
-- Message persistence
-- Typing indicators
-- Read receipts
-- Delivery confirmation
-- Online / offline presence tracking
-- Friends-only visibility
+### Languages & Frameworks
+- **Mobile Development**: Dart (Flutter)
+- **Systems Programming**: C++, C, CMake
+- **Native Development**: Swift
+- **Web**: HTML and related technologies
 
-### Real-Time Notifications
-- New messages
-- Friend requests
-- Likes and comments
-- Instant delivery via WebSocket
+### Tools & Technologies
+- **Version Control**: Git & GitHub
+- **Development Tools**: Visual Studio Code, Android Studio, Xcode,CMake, Make
+- **API & Backend**: REST APIs,  Socket.io, Firebase
+- **CI/CD**: GitHub Actions
+- **Package Managers**: Pub (Dart),  npm, pip
 
-## 🧱 Tech Stack
+### Databases
+- **Relational**: SQLite, PostgreSQL, MySQL
+- **NoSQL**: Firebase Realtime Database, Firestore, MongoDB
+- **Caching**: Redis, Hive
+- **Message Queues**: RabbitMQ, Kafka
 
-**Frontend**
-- Flutter 3.x
-- Dart
-- Riverpod (state management)
-- Dio (REST API client)
-- STOMP over WebSocket (SockJS compatible)
-- GoRouter
-- Material 3
+### Cloud Platforms
+- **Google Cloud**: Firebase, Google Cloud Platform
+- **Hosting**: Heroku, DigitalOcean, Vercel
 
-**Backend (separate repository)**
-- Java Spring Boot
-- MySQL
-- JWT Authentication
-- WebSocket (STOMP)
+## 📈 GitHub Stats
 
-## 🔌 Backend Integration
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mohamed-bouchoucha&show_icons=true&theme=radical)
 
-The app connects to a Spring Boot backend using:
-- REST APIs for authentication and social features
-- WebSocket (STOMP) for chat, presence, and notifications
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mohamed-bouchoucha&layout=compact&theme=radical)
 
-All backend URLs are configurable and can be adjusted to match your environment.
+## 🎯 Featured Projects
 
-## 📦 Project Status
+### Social Chat Api v1
+[Description of your featured project, what it does, and its significance]
+- **Tech Stack**: Dart, C++, CMake, Swift
+- **Repository**: [Social-Chat-Api-v1](https://github.com/mohamed-bouchoucha/Social-Chat-Api-v1)
 
-This repository provides a scalable, clean-architecture Flutter starter that is ready for:
-- Android
-- iOS
-- Web
+[Add more featured projects here]
 
-It is designed to be extended with additional features such as push notifications, media uploads, and advanced moderation tools.
+## 📚 Latest Blog Posts
+<!-- You can use this section if you write blogs -->
+- [Coming soon...]
 
-## 📄 License
+## 🤝 Let's Connect
 
-MIT License
+- **GitHub**: [@mohamed-bouchoucha](https://github.com/mohamed-bouchoucha)
+- **Email**: mbouchoucha88@gmail.com
+- **LinkedIn**:mohamed-bouchoucha
+
+
+## 📊 Weekly Development Breakdown
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
+
+---
+
+⭐ **If you find my projects useful, please consider giving them a star!** It means a lot to me.
+
+*Last updated: 2026-02-18*
